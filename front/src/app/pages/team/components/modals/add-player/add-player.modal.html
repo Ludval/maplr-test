@@ -1,0 +1,53 @@
+<div>
+  <h2 mat-dialog-title>Add new player</h2>
+
+  <mat-dialog-content>
+    <form id="playerForm" [formGroup]="playerForm">
+      <div class="block_fields">
+        <mat-form-field>
+          <mat-label>Number</mat-label>
+
+          <input matInput type="number" formControlName="number" formValidator placeholder="Ex. 99" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Position</mat-label>
+
+          <mat-select formControlName="position">
+            <mat-option *ngFor="let position of positionOptions" [value]="position">{{ position }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="block_fields">
+        <mat-form-field>
+          <mat-label>Firstname</mat-label>
+
+          <input matInput formControlName="name" formValidator placeholder="Ex. 99" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Lastname</mat-label>
+
+          <input matInput formControlName="lastname" formValidator placeholder="Ex. 99" />
+        </mat-form-field>
+      </div>
+
+      <div class="block_fields">
+        <mat-form-field>
+          <mat-label>Year</mat-label>
+
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let team of teamOptions" [value]="team">{{ team }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+
+    <button mat-raised-button color="primary" (click)="addPlayer()" [disabled]="playerForm.invalid">Confirm</button>
+  </mat-dialog-actions>
+</div>

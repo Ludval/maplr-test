@@ -1,0 +1,44 @@
+# specify docker-compose version
+version: '3'
+
+# Define the services/containers to be run
+services:
+  maplr-front: # name of the front service
+    build: ./front/ # specify the directory of the Dockerfile
+    ports:
+      - '4200:4200' # specify port forewarding
+    volumes:
+      - ./front:/maplr-front
+
+  maplr-api: # name of the api service
+    build: ./api/ # specify the directory of the Dockerfile
+    environment:
+      - SERVER_PORT=8080
+      - HOST=maplr-database
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - DB_NAME=hockey
+    ports:
+      - '8080:8080' #specify ports forwarding
+    depends_on:
+      maplr-database:
+        condition: service_healthy
+
+  maplr-database: # name of the database service
+    build: ./mysql
+    image: mysql_maplr
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hockey
+    ports:
+      - '10306:3306' #specify ports forwarding
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db_data:

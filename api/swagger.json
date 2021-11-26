@@ -1,0 +1,183 @@
+{
+  "swagger": "2.0",
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "info": {
+    "title": "MAPLR - Test technique",
+    "description": "Fullstack JS Hockey Game",
+    "version": "1.0"
+  },
+  "paths": {
+    "/team/{year}": {
+      "get": {
+        "operationId": "get_team",
+        "summary": "Get team of a specific given year.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "year",
+            "description": "Team year",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation\nLa requête retourne un objet Pagination, voir le modèle pagination_body",
+            "schema": {
+              "$ref": "#/definitions/team_response_body"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "post_team",
+        "summary": "Create a new team if doesn't exist then add a new player",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "year",
+            "description": "Team year",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "body",
+            "name": "Player",
+            "schema": {
+              "$ref": "#/definitions/player_body"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/player_response_body"
+            }
+          }
+        }
+      }
+    },
+    "/player/{id}/captain": {
+      "put": {
+        "operationId": "put_player",
+        "summary": "Set a player as captain",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Player id",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/player_response_body"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "player_body": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "number",
+          "description": "Player number",
+          "example": "99"
+        },
+        "name": {
+          "type": "string",
+          "description": "Player firstname",
+          "example": "Marion"
+        },
+        "lastname": {
+          "type": "string",
+          "description": "Player lastname",
+          "example": "Félix"
+        },
+        "position": {
+          "type": "string",
+          "description": "Player position",
+          "example": "forward"
+        },
+        "isCaptain": {
+          "type": "boolean",
+          "description": "If the player is captain",
+          "example": "false"
+        }
+      }
+    },
+    "player_response_body": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "description": "Player id",
+          "example": "1"
+        },
+        "number": {
+          "type": "number",
+          "description": "Player number",
+          "example": "99"
+        },
+        "name": {
+          "type": "string",
+          "description": "Player firstname",
+          "example": "Marion"
+        },
+        "lastname": {
+          "type": "string",
+          "description": "Player lastname",
+          "example": "Félix"
+        },
+        "position": {
+          "type": "string",
+          "description": "Player position",
+          "example": "forward"
+        },
+        "isCaptain": {
+          "type": "boolean",
+          "description": "If the player is captain",
+          "example": "false"
+        }
+      }
+    },
+    "team_response_body": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "description": "Team id",
+          "example": "1"
+        },
+        "coach": {
+          "type": "string",
+          "description": "Coach name",
+          "example": "John Smith"
+        },
+        "year": {
+          "type": "number",
+          "description": "Team year",
+          "example": "2021"
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/player_response_body"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+#playerForm {
+  display: flex;
+  flex-direction: column;
+
+  .block_fields {
+    display: flex;
+    align-items: center;
+
+    mat-form-field {
+      margin: 0.5em;
+    }
+  }
+}

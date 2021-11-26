@@ -1,0 +1,20 @@
+@import 'colors';
+
+#header {
+  background-color: $primary;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+
+  .header_logo {
+    width: 35px;
+    height: 35px;
+    margin-left: 1em;
+  }
+
+  .maplr_logo {
+    width: 70px;
+    margin-left: 1em;
+  }
+}
