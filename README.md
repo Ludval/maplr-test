@@ -18,3 +18,9 @@ Vous devrez créer les tables via le fichier `schema.sql` présent dans le Githu
 - Frontend: [localhost:4200](http://localhost:4200)
 - API: [localhost:8080](http://localhost:8080)
 - Swagger: [localhost:8080/api-docs](http://localhost:8080/api-docs)
+
+## Connexion base de données
+
+- Port: 10306
+- Username: root
+- Password: root
